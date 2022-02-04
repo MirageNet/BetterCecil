@@ -15,7 +15,45 @@ Import all files into project
 
 ## How to use 
 
-1) todo
+```cs
+public class MyILPostProcessor : ILPostProcessor
+{
+    public override ILPostProcessor GetInstance() => this;
+
+    public override ILPostProcessResult Process(ICompiledAssembly compiledAssembly)
+    {
+        // call WillProcess because unity doesn't check it before calling Process
+        if (!WillProcess(compiledAssembly))
+            return null;
+
+        // Use inherited class WeaverBase to return ILPostProcessResult
+        var weaver = new MyWeaver();
+        return weaver.Process(compiledAssembly);
+    }
+
+    public override bool WillProcess(ICompiledAssembly compiledAssembly) 
+    { 
+        // here to only process some assemblies
+        return true;
+    }
+}
+
+public class MyWeaver : WeaverBase
+{
+    protected override Result Process(AssemblyDefinition assembly) 
+    {
+        // put your server code here 
+
+        // Example:
+        // check all types in assembly
+        ModuleDefinition module = assembly.MainModule;
+        foreach (TypeDefinition type in module.Types)
+        {
+            // do stuff with types here
+        }
+    }
+}
+```
 
 
 ## MIT License
