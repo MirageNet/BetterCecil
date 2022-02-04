@@ -16,3 +16,10 @@ Import all files into project
 ## How to use 
 
 1) todo
+
+
+## MIT License
+
+Some of the extension methods in here are originally from [Mirage](https://github.com/MirageNet/Mirage) and [Mirror](https://github.com/vis2k/Mirror)
+
+The original ReflectionImporter and AssemblyResolver code is from [Unity-Technologies/com.unity.netcode.gameobjects](https://github.com/Unity-Technologies/com.unity.netcode.gameobjects/tree/develop/com.unity.netcode.gameobjects/Editor/CodeGen)
