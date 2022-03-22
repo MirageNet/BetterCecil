@@ -88,7 +88,7 @@ namespace BetterCecil
             var message = new DiagnosticMessage
             {
                 DiagnosticType = DiagnosticType.Error,
-                MessageData = $"Failed to weaver {Name} because of Exception: {e}",
+                MessageData = $"Weaver {Name} failed on {AssemblyDefinition?.Name} because of Exception: {e}",
             };
             return new ILPostProcessResult(null, new List<DiagnosticMessage> { message });
         }

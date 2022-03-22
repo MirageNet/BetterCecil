@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Mono.Cecil;
-using CustomAttributeNamedArgument = Mono.Cecil.CustomAttributeNamedArgument;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using ICustomAttributeProvider = Mono.Cecil.ICustomAttributeProvider;
 
@@ -59,6 +58,9 @@ namespace BetterCecil
         /// <returns></returns>
         public static TypeDefinition TryResolve(this TypeReference type)
         {
+            if (type == null)
+                return null;
+
             if (type.Scope.Name == "Windows")
             {
                 return null;
@@ -114,10 +116,15 @@ namespace BetterCecil
 
         public static bool ImplementsInterface<TInterface>(this TypeDefinition td)
         {
+            return td.ImplementsInterface(typeof(TInterface));
+        }
+
+        public static bool ImplementsInterface(this TypeDefinition td, Type interfaceType)
+        {
             if (td == null)
                 return false;
 
-            if (td.Is<TInterface>())
+            if (td.Is(interfaceType))
                 return true;
 
             TypeDefinition typedef = td;
@@ -126,7 +133,7 @@ namespace BetterCecil
             {
                 foreach (InterfaceImplementation iface in typedef.Interfaces)
                 {
-                    if (iface.InterfaceType.Is<TInterface>())
+                    if (iface.InterfaceType.Is(interfaceType))
                         return true;
                 }
 
