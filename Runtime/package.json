@@ -1,0 +1,14 @@
+{
+  "name": "com.miragenet.bettercecil",
+  "displayName": "Better Cecil",
+  "description": "Collection of helper methods for using Mono.Cecil with Unity's ILPostProcessor.",
+  "author": "James Frowen",
+  "version": "1.0.0",
+  "dependencies": {
+    "com.unity.nuget.mono-cecil": "1.10.2"
+  },
+  "repository": {
+    "url": "https://github.com/miragenet/bettercecil.git",
+    "type": "git"
+  }
+}
